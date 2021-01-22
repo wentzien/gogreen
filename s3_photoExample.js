@@ -17,16 +17,17 @@ var s3 = new AWS.S3({
 
 function listAlbums() {
   s3.listObjects({ Delimiter: "/" }, function(err, data) {
+
     if (err) {
-      return alert("There was an error listing your albums: " + err.message);
+      return alert("There was an error listing your directories: " + err.message);
     } else {
-      var albums = data.CommonPrefixes.map(function(commonPrefix) {
-        var prefix = commonPrefix.Prefix;
+      var albums = data.Contents.map(function(content) {
+        var prefix = content.Key;
         var albumName = decodeURIComponent(prefix.replace("/", ""));
         return getHtml([
           "<li>",
-          "<span onclick=\"deleteAlbum('" + albumName + "')\">X</span>",
-          "<span onclick=\"viewAlbum('" + albumName + "')\">",
+          "<button onclick=\"deleteAlbum('" + albumName + "')\">X</button>",
+          "<span class ='pointer' onclick=\"viewAlbum('" + albumName + "')\">",
           albumName,
           "</span>",
           "</li>"
@@ -34,18 +35,18 @@ function listAlbums() {
       });
       var message = albums.length
         ? getHtml([
-            "<p>Click on an album name to view it.</p>",
-            "<p>Click on the X to delete the album.</p>"
+            "<p>Click on a directory name to view it.</p>",
+            "<p>Click on the X to delete the directory.</p>"
           ])
-        : "<p>You do not have any albums. Please Create album.";
+        : "<p>You do not have any directories. Please Create a directory.";
       var htmlTemplate = [
-        "<h2>Albums</h2>",
+        "<h2>Directories</h2>",
         message,
         "<ul>",
         getHtml(albums),
         "</ul>",
-        "<button onclick=\"createAlbum(prompt('Enter Album Name:'))\">",
-        "Create New Album",
+        "<button onclick=\"createAlbum(prompt('Enter Directory Name:'))\">",
+        "Create New Directory",
         "</button>"
       ];
       document.getElementById("app").innerHTML = getHtml(htmlTemplate);
@@ -56,7 +57,7 @@ function listAlbums() {
 function createAlbum(albumName) {
   albumName = albumName.trim();
   if (!albumName) {
-    return alert("Album names must contain at least one non-space character.");
+    return alert("Directory names must contain at least one non-space character.");
   }
   if (albumName.indexOf("/") !== -1) {
     return alert("Album names cannot contain slashes.");
@@ -71,9 +72,9 @@ function createAlbum(albumName) {
     }
     s3.putObject({ Key: albumKey }, function(err, data) {
       if (err) {
-        return alert("There was an error creating your album: " + err.message);
+        return alert("There was an error creating your directory: " + err.message);
       }
-      alert("Successfully created album.");
+      alert("Successfully created directory.");
       viewAlbum(albumName);
     });
   });
@@ -83,7 +84,7 @@ function viewAlbum(albumName) {
   var albumPhotosKey = encodeURIComponent(albumName) + "/";
   s3.listObjects({ Prefix: albumPhotosKey }, function(err, data) {
     if (err) {
-      return alert("There was an error viewing your album: " + err.message);
+      return alert("There was an error viewing your directory: " + err.message);
     }
     // 'this' references the AWS.Response instance that represents the response
     var href = this.request.httpRequest.endpoint.href;
@@ -129,11 +130,11 @@ console.log(photoUrl);
       ]);
     });
     var message = photos.length
-      ? "<p>Click on the X to delete the photo</p>"
-      : "<p>You do not have any photos in this album. Please add photos.</p>";
+      ? "<p>Click on the X to delete the file</p>"
+      : "<p>You do not have any files in this directory. Please add files.</p>";
     var htmlTemplate = [
       "<h2>",
-      "Album: " + albumName,
+      "Directory: " + albumName,
       "</h2>",
       message,
       "<div>",
@@ -141,10 +142,10 @@ console.log(photoUrl);
       "</div>",
       '<input id="photoupload" type="file" accept=".pdf,image/*">',
       '<button id="addphoto" onclick="addPhoto(\'' + albumName + "')\">",
-      "Add Photo",
+      "Add File",
       "</button>",
       '<button onclick="listAlbums()">',
-      "Back To Albums",
+      "Back To Directories",
       "</button>"
     ];
     document.getElementById("app").innerHTML = getHtml(htmlTemplate);
@@ -175,11 +176,11 @@ function addPhoto(albumName) {
 
   promise.then(
     function(data) {
-      alert("Successfully uploaded photo.");
+      alert("Successfully uploaded file.");
       viewAlbum(albumName);
     },
     function(err) {
-      return alert("There was an error uploading your photo: ", err.message);
+      return alert("There was an error uploading your file: ", err.message);
     }
   );
 }
@@ -187,9 +188,9 @@ function addPhoto(albumName) {
 function deletePhoto(albumName, photoKey) {
   s3.deleteObject({ Key: photoKey }, function(err, data) {
     if (err) {
-      return alert("There was an error deleting your photo: ", err.message);
+      return alert("There was an error deleting your file: ", err.message);
     }
-    alert("Successfully deleted photo.");
+    alert("Successfully deleted file.");
     viewAlbum(albumName);
   });
 }
@@ -198,7 +199,7 @@ function deleteAlbum(albumName) {
   var albumKey = encodeURIComponent(albumName) + "/";
   s3.listObjects({ Prefix: albumKey }, function(err, data) {
     if (err) {
-      return alert("There was an error deleting your album: ", err.message);
+      return alert("There was an error deleting your directory: ", err.message);
     }
     var objects = data.Contents.map(function(object) {
       return { Key: object.Key };
@@ -209,9 +210,9 @@ function deleteAlbum(albumName) {
       },
       function(err, data) {
         if (err) {
-          return alert("There was an error deleting your album: ", err.message);
+          return alert("There was an error deleting your directory: ", err.message);
         }
-        alert("Successfully deleted album.");
+        alert("Successfully deleted directory.");
         listAlbums();
       }
     );

@@ -117,7 +117,7 @@ function viewAlbum(albumName) {
       : "<p>You do not have any photos in this album. Please add photos.</p>";
     var htmlTemplate = [
       "<h2>",
-      "Album: " + albumName,
+      "Directory: " + albumName,
       "</h2>",
       message,
       "<div>",
@@ -128,7 +128,7 @@ function viewAlbum(albumName) {
       "Add Photo",
       "</button>",
       '<button onclick="listAlbums()">',
-      "Back To Albums",
+      "Back To Directory's",
       "</button>"
     ];
     document.getElementById("app").innerHTML = getHtml(htmlTemplate);
