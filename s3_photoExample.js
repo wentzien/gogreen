@@ -1,7 +1,7 @@
 
-var albumBucketName = "documentsgroupdhspf";
-var bucketRegion = "us-east-1";
-var IdentityPoolId = "us-east-1:d5c7f82a-4e7e-4a20-806e-013f1541a4b6";
+var albumBucketName = "";
+var bucketRegion = "";
+var IdentityPoolId = "";
 
 AWS.config.update({
   region: bucketRegion,
