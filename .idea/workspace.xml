@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd52174f-9758-4ea0-bfb0-a19c9a197e4a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/menu.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/s3_photoExample.js" beforeDir="false" afterPath="$PROJECT_DIR$/s3_photoExample.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/s3_photoExample_backup.js" beforeDir="false" afterPath="$PROJECT_DIR$/s3_photoExample_backup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/upload.php" beforeDir="false" afterPath="$PROJECT_DIR$/upload.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,7 +49,7 @@
       <option name="presentableId" value="Default" />
       <updated>1611326091341</updated>
       <workItem from="1611326092467" duration="1157000" />
-      <workItem from="1611327269262" duration="3940000" />
+      <workItem from="1611327269262" duration="8575000" />
     </task>
     <servers />
   </component>

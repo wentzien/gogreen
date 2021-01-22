@@ -40,7 +40,7 @@ function listAlbums() {
           ])
         : "<p>You do not have any directories. Please Create a directory.";
       var htmlTemplate = [
-        "<h2>Directories</h2>",
+        "<h3>Directories</h3>",
         message,
         "<ul>",
         getHtml(albums),
@@ -95,13 +95,12 @@ function viewAlbum(albumName) {
 
       var photoUrl = bucketUrl + encodeURIComponent(photoKey);
 
-	var filetype = photoUrl.substr(-3);
-console.log(photoUrl);
+      var filetype = /[^.]*$/.exec(photoUrl)[0];
 	
-	if(filetype == "pdf"){
+	if(filetype.toLowerCase() == "pdf"){
 		var url = "https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg";
 		var htmlFile = '<a href="' + photoUrl + '"><img style="width:128px;height:128px;" src="' + url + '"/><a>';
-	}else if(filetype == "png" ||filetype == "jpg"){
+	}else if(filetype.toLowerCase() == "png" ||filetype.toLowerCase() == "jpg" ||filetype.toLowerCase() == "jpeg"){
 		var htmlFile = '<img style="width:128px;height:128px;" src="' + photoUrl + '"/>';
 	}else{
 		var url = "https://miro.medium.com/max/2400/1*hFwwQAW45673VGKrMPE2qQ.png";
@@ -115,13 +114,13 @@ console.log(photoUrl);
 	'' + htmlFile + '',
         "</div>",
         "<div>",
-        "<span onclick=\"deletePhoto('" +
+        "<button onclick=\"deletePhoto('" +
           albumName +
           "','" +
           photoKey +
           "')\">",
         "X",
-        "</span>",
+        "</button>",
         "<span>",
         photoKey.replace(albumPhotosKey, ""),
         "</span>",
@@ -133,9 +132,9 @@ console.log(photoUrl);
       ? "<p>Click on the X to delete the file</p>"
       : "<p>You do not have any files in this directory. Please add files.</p>";
     var htmlTemplate = [
-      "<h2>",
+      "<h3>",
       "Directory: " + albumName,
-      "</h2>",
+      "</h3>",
       message,
       "<div>",
       getHtml(photos),
@@ -157,32 +156,38 @@ function addPhoto(albumName) {
   if (!files.length) {
     return alert("Please choose a file to upload first.");
   }
-  var file = files[0];
-  var fileName = file.name;
-  var albumPhotosKey = encodeURIComponent(albumName) + "/";
+  var acceptedFiletypes = ["png","jpg","pdf","jpeg"];
+  var filetype = /[^/]*$/.exec(files[0].type)[0];
+  if(acceptedFiletypes.includes(filetype)) {
+    var file = files[0];
+    var fileName = file.name;
+    var albumPhotosKey = encodeURIComponent(albumName) + "/";
 
-  var photoKey = albumPhotosKey + fileName;
+    var photoKey = albumPhotosKey + fileName;
 
-  // Use S3 ManagedUpload class as it supports multipart uploads
-  var upload = new AWS.S3.ManagedUpload({
-    params: {
-      Bucket: albumBucketName,
-      Key: photoKey,
-      Body: file
-    }
-  });
+    // Use S3 ManagedUpload class as it supports multipart uploads
+    var upload = new AWS.S3.ManagedUpload({
+      params: {
+        Bucket: albumBucketName,
+        Key: photoKey,
+        Body: file
+      }
+    });
 
-  var promise = upload.promise();
+    var promise = upload.promise();
 
-  promise.then(
-    function(data) {
-      alert("Successfully uploaded file.");
-      viewAlbum(albumName);
-    },
-    function(err) {
-      return alert("There was an error uploading your file: ", err.message);
-    }
-  );
+    promise.then(
+        function (data) {
+          alert("Successfully uploaded file.");
+          viewAlbum(albumName);
+        },
+        function (err) {
+          return alert("There was an error uploading your file: ", err.message);
+        }
+    );
+  }else{
+    return alert(filetype+" is not a allowed filetype");
+  }
 }
 
 function deletePhoto(albumName, photoKey) {
@@ -201,9 +206,8 @@ function deleteAlbum(albumName) {
     if (err) {
       return alert("There was an error deleting your directory: ", err.message);
     }
-    var objects = data.Contents.map(function(object) {
-      return { Key: object.Key };
-    });
+    var objects = [{Key:albumName}];
+    console.log(objects);
     s3.deleteObjects(
       {
         Delete: { Objects: objects, Quiet: true }
