@@ -1,1 +1,1 @@
-<?php $RDS_URL='dbmaster5722.czieasetjbsi.us-east-1.rds.amazonaws.com'; $RDS_DB='starter'; $RDS_user='admin'; $RDS_pwd='adminadmin'; ?>
+<?php $RDS_URL=''; $RDS_DB=''; $RDS_user=''; $RDS_pwd=''; ?>
