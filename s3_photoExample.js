@@ -124,6 +124,8 @@ function viewAlbum(albumName) {
         "<span>",
         photoKey.replace(albumPhotosKey, ""),
         "</span>",
+   '<br/>',
+   '<br/>',
         "</div>",
         "</span>"
       ]);
@@ -139,7 +141,9 @@ function viewAlbum(albumName) {
       "<div>",
       getHtml(photos),
       "</div>",
+      '<br/>',
       '<input id="photoupload" type="file" accept=".pdf,image/*">',
+      '<br/>',
       '<button id="addphoto" onclick="addPhoto(\'' + albumName + "')\">",
       "Add File",
       "</button>",
