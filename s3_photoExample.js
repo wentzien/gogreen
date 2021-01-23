@@ -1,3 +1,9 @@
+// enables tooltip
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+});
+
 var albumBucketName = "gogreen-doc-hspf";
 var bucketRegion = "us-east-1";
 var IdentityPoolId = "us-east-1:b2465937-8bf1-4c7e-aacb-a9ead90c925b";
@@ -36,21 +42,16 @@ function listAlbums() {
                     // "</span>",
                 ]);
             },);
-            var message = albums.length
-                ? getHtml([
-                    "<p>Click on a directory name to view it.</p>",
-                    "<p>Click on the X to delete the directory.</p>"
-                ])
-                : "<p>You do not have any directories. Please Create a directory.";
+            var message = albums.length ? "": "<p>You do not have any directories. Please Create a directory.";
             var htmlTemplate = [
-                "<h3>Directories</h3>",
+                "<h3>Directory List</h3>",
                 message,
                 `<table class="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Album</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Album <i class="fa fa-info-circle" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="Click on a directory name to view it."></i></th>
+                            <th scope="col">Action <i class="fa fa-info-circle" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="top" title="Click on the X to delete the directory."></i></th>
                         </tr>
                     </thead>
                     <tbody>`,
