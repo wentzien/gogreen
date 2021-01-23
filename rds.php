@@ -1,9 +1,8 @@
+<?php $navActive="rds"; ?>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GoGreen</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+      <?php include("head.php"); ?>
   </head>
 
   <body>
@@ -30,10 +29,6 @@
   </div>
 </div>
 </div>
-
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/scripts.js"></script>
 
 </body>
 </html>
