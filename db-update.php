@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AWS Technical Essentials v4.1</title>
+    <title>GoGreen</title>
     <link href="style.css" media="all" rel="stylesheet" type="text/css" />
   </head>
 
