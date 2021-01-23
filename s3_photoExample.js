@@ -28,7 +28,7 @@ function listAlbums() {
                     `<tr>
                         <th scope="row">${albumNumber++}</th>
                         <td><span class ='pointer' onclick="viewAlbum('${albumName}')">${albumName}</td>
-                        <td><button type="button" onclick="deleteAlbum('${albumName}')" class="btn btn-danger">Delete</button></td>
+                        <td><button type="button" onclick="deleteAlbum('${albumName}')" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
                     </tr>`,
                     // "<button onclick=\"deleteAlbum('" + albumName + "')\">X</button>",
                     // "<span class ='pointer' onclick=\"viewAlbum('" + albumName + "')\">",
