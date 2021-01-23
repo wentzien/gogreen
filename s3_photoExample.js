@@ -124,7 +124,7 @@ function viewAlbum(albumName) {
 
 
             return getHtml([
-                "<div class='content-docs'>",
+                "<div class='content-docs zoom'>",
                 htmlFile,
                 "<br>",
                 // photoKey.replace(albumPhotosKey, ""),
