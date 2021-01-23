@@ -1,7 +1,7 @@
 
-var albumBucketName = "";
-var bucketRegion = "";
-var IdentityPoolId = "";
+var albumBucketName = "gogreen-doc-hspf";
+var bucketRegion = "us-east-1";
+var IdentityPoolId = "us-east-1:b2465937-8bf1-4c7e-aacb-a9ead90c925b";
 
 AWS.config.update({
   region: bucketRegion,
