@@ -142,12 +142,20 @@ function viewAlbum(albumName) {
             getHtml(photos),
             "</div>",
             '<br/>',
-            '<input id="photoupload" type="file" accept=".pdf,image/*">',
-            '<br/>',
-            '<button id="addphoto" onclick="addPhoto(\'' + albumName + "')\">",
+            // '<input id="photoupload" type="file" accept=".pdf,image/*">',
+            `<div class="input-group mb-3" style="margin-top: 10px">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Upload</span>
+              </div>
+              <div class="custom-file">
+                <input id="photoupload" type="file" class="custom-file-input" accept=".pdf,image/*"">
+                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              </div>
+            </div>`,
+            '<button class="btn btn-primary" id="addphoto" onclick="addPhoto(\'' + albumName + "')\">",
             "Add File",
             "</button>",
-            '<button onclick="listAlbums()">',
+            '<button class="btn btn-primary" onclick="listAlbums()">',
             "Back To Directories",
             "</button>"
         ];
