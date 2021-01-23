@@ -1,2 +1,25 @@
 
-.pointer {cursor: pointer;}
+.pointer {
+    cursor: pointer;
+}
+
+.container-docs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.content-docs {
+    margin: 5px 10px 5px 10px;
+}
+
+.del-docs {
+    margin-top: 5px;;
+    float: right;
+}
+
+.img-docs {
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 20px;
+}

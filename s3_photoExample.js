@@ -114,46 +114,31 @@ function viewAlbum(albumName) {
 
             if (filetype.toLowerCase() == "pdf") {
                 var url = "https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg";
-                var htmlFile = '<a href="' + photoUrl + '"><img style="width:128px;height:128px;" src="' + url + '"/><a>';
+                var htmlFile = '<a href="' + photoUrl + '"><img class="img-docs" src="' + url + '"/><a>';
             } else if (filetype.toLowerCase() == "png" || filetype.toLowerCase() == "jpg" || filetype.toLowerCase() == "jpeg") {
-                var htmlFile = '<img style="width:128px;height:128px;" src="' + photoUrl + '"/>';
+                var htmlFile = '<img class="img-docs" src="' + photoUrl + '"/>';
             } else {
                 var url = "https://miro.medium.com/max/2400/1*hFwwQAW45673VGKrMPE2qQ.png";
-                var htmlFile = '<img style="width:128px;height:128px;" src="' + url + '"/>';
+                var htmlFile = '<img class="img-docs" src="' + url + '"/>';
             }
 
 
             return getHtml([
-                "<span>",
-                "<div>",
-                '' + htmlFile + '',
+                "<div class='content-docs'>",
+                htmlFile,
+                "<br>",
+                // photoKey.replace(albumPhotosKey, ""),
+                `<i class="fa fa-trash-o del-docs pointer" onclick="deletePhoto(${albumName}, ${photoKey})" aria-hidden="true"></i>`,
                 "</div>",
-                "<div>",
-                "<button onclick=\"deletePhoto('" +
-                albumName +
-                "','" +
-                photoKey +
-                "')\">",
-                "X",
-                "</button>",
-                "<span>",
-                photoKey.replace(albumPhotosKey, ""),
-                "</span>",
-                '<br/>',
-                '<br/>',
-                "</div>",
-                "</span>"
             ]);
         });
-        var message = photos.length
-            ? "<p>Click on the X to delete the file</p>"
-            : "<p>You do not have any files in this directory. Please add files.</p>";
+        var message = photos.length ? "" : "<p>You do not have any files in this directory. Please add files.</p>";
         var htmlTemplate = [
             "<h3>",
             "Directory: " + albumName,
             "</h3>",
             message,
-            "<div>",
+            "<div class='container-docs'>",
             getHtml(photos),
             "</div>",
             '<br/>',
