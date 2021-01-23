@@ -13,7 +13,7 @@
                 <h2>GoGreen Document Upload</h2>
                 <div id="app"></div>
                 <script src="https://sdk.amazonaws.com/js/aws-sdk-2.829.0.js"></script>
-                <script src="./s3_photoExample.js"></script>
+                <script src="s3script.js"></script>
                 <script>
                     function getHtml(template) {
                         return template.join('\n');
