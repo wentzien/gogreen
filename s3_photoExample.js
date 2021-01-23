@@ -57,9 +57,11 @@ function listAlbums() {
                 getHtml(albums),
                 `    </tbody>
                 </table>`,
-                "<button onclick=\"createAlbum(prompt('Enter Directory Name:'))\">",
-                "Create New Directory",
-                "</button>"
+                `<button type="button" class="btn btn-primary" onclick="createAlbum(prompt('Enter Directory Name:'))">Create New Directory</button>`,
+
+                // "<button onclick=\"createAlbum(prompt('Enter Directory Name:'))\">",
+                // "Create New Directory",
+                // "</button>"
             ];
             document.getElementById("app").innerHTML = getHtml(htmlTemplate);
         }
