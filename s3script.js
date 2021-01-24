@@ -128,10 +128,10 @@ function viewAlbum(albumName) {
                 htmlFile,
                 "<br>",
                 // photoKey.replace(albumPhotosKey, ""),
-                `<i class="fa fa-trash-o del-docs pointer" onclick="deletePhoto(${albumName}, ${photoKey})" aria-hidden="true"></i>`,
+                `<i class="fa fa-trash-o del-docs pointer" onclick="deletePhoto('${albumName}', '${photoKey}')" aria-hidden="true"></i>`,
                 "</div>",
             ]);
-        });
+        },);
         var message = photos.length ? "" : "<p>You do not have any files in this directory. Please add files.</p>";
         var htmlTemplate = [
             "<h3>",
