@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item <?php if($navActive == "load") echo "active" ?>">
-                <a class="nav-link" href="load.php">Load Test <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="load.php">Load Test</a>
             </li>
             <li class="nav-item <?php if($navActive == "rds") echo "active" ?>">
                 <a class="nav-link" href="rds.php">RDS</a>
