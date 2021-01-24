@@ -15,7 +15,7 @@
                 <a class="nav-link" href="rds.php">RDS</a>
             </li>
             <li class="nav-item <?php if($navActive == "upload") echo "active" ?>">
-                <a class="nav-link" href="upload.php">Upload Documents</a>
+                <a class="nav-link" href="upload.php">Documents</a>
             </li>
         </ul>
     </div>
